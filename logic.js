@@ -2,8 +2,7 @@
 // ==================================================================================================
 
 // Array of Word Options (all lowercase).
-var wordsList = ["jerome", "neena", "darion", "lou", "greg", "jordan",
-  "jasmine", "stephen", "jacob", "adam", "rui", "luis"];
+var wordsList = ["fitsum", "adil", "helen", "bezawit", "fikre", "temesgen"];
 
 // Computer selected solution will be held here.
 var chosenWord = "";
@@ -35,7 +34,6 @@ var numGuesses = 9;
 // It's how we we will start and restart the game.
 // (Note: It's not being run here. Function declarations like this are made for future use.)
 function startGame() {
-
   // Reset the guesses back to 0.
   numGuesses = 9;
 
@@ -72,7 +70,9 @@ function startGame() {
   document.getElementById("guesses-left").innerHTML = numGuesses;
 
   // Prints the blanks at the beginning of each round in the HTML.
-  document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(" ");
+  document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(
+    " "
+  );
 
   // Clears the wrong guesses from the previous round.
   document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
@@ -82,16 +82,13 @@ function startGame() {
 // It's where we will do all of the comparisons for matches.
 // Again, it's not being called here. It's just being made for future use.
 function checkLetters(letter) {
-
   // This boolean will be toggled based on whether or not
   // a user letter is found anywhere in the word.
   var letterInWord = false;
 
   // Check if a letter exists inside the array at all.
   for (var i = 0; i < numBlanks; i++) {
-
     if (chosenWord[i] === letter) {
-
       // If the letter exists then toggle this boolean to true.
       // This will be used in the next step.
       letterInWord = true;
@@ -101,13 +98,10 @@ function checkLetters(letter) {
   // If the letter exists somewhere in the word,
   // then figure out exactly where (which indices).
   if (letterInWord) {
-
     // Loop through the word
     for (var j = 0; j < numBlanks; j++) {
-
       // Populate the blanksAndSuccesses with every instance of the letter.
       if (chosenWord[j] === letter) {
-
         // Here we set specific blank spaces to equal the correct letter
         // when there is a match.
         blanksAndSuccesses[j] = letter;
@@ -120,24 +114,27 @@ function checkLetters(letter) {
 
   // If the letter doesn't exist at all...
   else {
-
     // Then we add the letter to the list of wrong letters.
     wrongGuesses.push(letter);
 
     // We also subtract one of the guesses.
     numGuesses--;
-
   }
-
 }
 
 // roundComplete() function
 // Here we will have all of the code that needs to be run after each guess is made.
 function roundComplete() {
-
   // First, log an initial status update in the console
   // telling us how many wins, losses, and guesses are left.
-  console.log("WinCount: " + winCounter + " | LossCount: " + lossCounter + " | NumGuesses: " + numGuesses);
+  console.log(
+    "WinCount: " +
+      winCounter +
+      " | LossCount: " +
+      lossCounter +
+      " | NumGuesses: " +
+      numGuesses
+  );
 
   // HTML UPDATES
   // ============
@@ -146,7 +143,9 @@ function roundComplete() {
   document.getElementById("guesses-left").innerHTML = numGuesses;
 
   // This will print the array of guesses and blanks onto the page.
-  document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(" ");
+  document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(
+    " "
+  );
 
   // This will print the wrong guesses onto the page.
   document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
@@ -154,7 +153,6 @@ function roundComplete() {
   // If our hangman string equals the solution.
   // (meaning that we guessed all the letters to match the solution)...
   if (lettersInChosenWord.toString() === blanksAndSuccesses.toString()) {
-
     // Add to the win counter
     winCounter++;
 
@@ -170,7 +168,6 @@ function roundComplete() {
 
   // If we've run out of guesses
   else if (numGuesses === 0) {
-
     // Add to the loss counter
     lossCounter++;
 
@@ -182,9 +179,7 @@ function roundComplete() {
 
     // Restart the game
     startGame();
-
   }
-
 }
 
 // MAIN PROCESS (THIS IS THE CODE THAT CONTROLS WHAT IS ACTUALLY RUN)
@@ -194,8 +189,7 @@ function roundComplete() {
 startGame();
 
 // Then initiates the function for capturing key clicks.
-document.onkeyup = function(event) {
-
+document.onkeyup = function (event) {
   // Converts all key clicks to lowercase letters.
   letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
 
